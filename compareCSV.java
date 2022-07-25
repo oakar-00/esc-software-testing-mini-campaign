@@ -68,7 +68,7 @@ public class compareCSV {
         }
     }
 
-    public static void compare(String file1, String file2) {
+    public static ArrayList<String> compare(String file1, String file2) {
         ArrayList file_1 = new ArrayList();
         ArrayList file_2 = new ArrayList();
         ArrayList file_3 = new ArrayList();
@@ -91,6 +91,8 @@ public class compareCSV {
         }
         putData("mismatch_file.csv", file_3);
         System.out.println("Comparison is Successful!");
+
+        return file_3;
 
     }
 }
