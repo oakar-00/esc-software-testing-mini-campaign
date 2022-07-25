@@ -11,18 +11,16 @@ import java.util.*;
 
 @RunWith(Parameterized.class)
 
-public class compareCSVTest {
-    private String csv1Name;
-    private String csv2Name;
-    private ArrayList<String> expectedCsv;
+public class getDataTest {
+    private String filename;
+    private ArrayList<String> expectedData;
 
-    public compareCSVTest(String csv1Name, String csv2Name, String expectedCsv) {
-        this.csv1Name = csv1Name;
-        this.csv2Name = csv2Name;
-        this.expectedCsv = readCSVIn(expectedCsv);
+    public getDataTest(String filename, String expectedDataCSV) {
+        this.filename = filename;
+        this.expectedData = readCsvIn(expectedDataCSV);
     }
 
-    public static ArrayList<String> readCSVIn(String filename) {
+    public static ArrayList<String> readCsvIn(String filename) {
         ArrayList<String> asList = new ArrayList<>();
         try {
             File csv = new File(filename);
@@ -44,16 +42,17 @@ public class compareCSVTest {
 
     @Parameters
     public static Collection input() {
-        return Arrays.asList(new Object[][] { { "test1a.csv", "test1b.csv", "test1c.csv" },
-                { "test2a.csv", "test2b.csv", "test2c.csv" }, { "test3a.csv", "test3b.csv", "test3c.csv" } });
+        return Arrays.asList(new Object[][] { { "sample_file_1.csv", "sample_file_1.csv" },
+                { "test1a.csv", "test1a.csv" }, { "test1b.csv", "test1b.csv" },
+                { "test2a.csv", "test2a.csv" }, { "test2b.csv", "test2b.csv" },
+                { "test3a.csv", "test3a.csv" }, { "test3b.csv", "test3b.csv" } });
     }
 
     @Test
-    public void testCompareCSVTest() {
+    public void testGetDataTest() {
         new compareCSV();
-        // System.out.println();
-        assertEquals(expectedCsv, compareCSV.compare(csv1Name, csv2Name));
-        System.out.println("compareCSV test ran successfully");
+        assertEquals(expectedData, compareCSV.getData(filename));
+        System.out.println("getData test ran successfully");
 
     }
 }
