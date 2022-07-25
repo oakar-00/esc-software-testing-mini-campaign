@@ -44,8 +44,7 @@ public class putDataTest {
 
     @Parameters
     public static Collection input() {
-        return Arrays.asList(new Object[][] { { "test_1a.csv", "test_1b.csv", "test_1c.csv" },
-                { "test_2a.csv", "test_2b.csv", "test_2c.csv" }, { "test_3a.csv", "test_3b.csv", "test_3c.csv" } });
+        return Arrays.asList(new Object[][] { { "test1a_copy.csv", "test1a.csv", "test1a.csv" } });
     }
 
     @Test

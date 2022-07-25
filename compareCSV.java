@@ -48,7 +48,7 @@ public class compareCSV {
 
     }
 
-    public static void putData(String filename, ArrayList Data) {
+    public static String putData(String filename, ArrayList Data) {
         try {
             FileWriter myWriter = new FileWriter(filename);
 
@@ -66,9 +66,10 @@ public class compareCSV {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+        return filename;
     }
 
-    public static ArrayList<String> compare(String file1, String file2) {
+    public static String compare(String file1, String file2, String file3) {
         ArrayList file_1 = new ArrayList();
         ArrayList file_2 = new ArrayList();
         ArrayList file_3 = new ArrayList();
@@ -76,6 +77,8 @@ public class compareCSV {
         file_1 = getData(file1);
 
         file_2 = getData(file2);
+
+        file_3 = getData(file3);
 
         if (file_1.size() == file_2.size()) {
             for (int i = 0; i < file_1.size(); i++) {
@@ -89,10 +92,8 @@ public class compareCSV {
             }
 
         }
-        putData("mismatch_file.csv", file_3);
         System.out.println("Comparison is Successful!");
-
-        return file_3;
+        return putData(file3, file_3);
 
     }
 }

@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.*;
+import java.util.stream.*;
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -12,6 +15,7 @@ import java.util.*;
 @RunWith(Parameterized.class)
 
 public class getDataTest {
+    static String path = "C:/Documents/SUTD Stuff/Studies/Term5/Elements of Software Construction/esc-software-testing-mini-campaign/";
     private String filename;
     private ArrayList<String> expectedData;
 
@@ -21,18 +25,25 @@ public class getDataTest {
     }
 
     public static ArrayList<String> readCsvIn(String filename) {
-        ArrayList<String> asList = new ArrayList<>();
+        ArrayList asList = new ArrayList();
         try {
-            File csv = new File(filename);
-            FileReader fr = new FileReader(csv);
-            BufferedReader br = new BufferedReader(fr);
+            File Obj = new File(filename);
+            Scanner Reader = new Scanner(Obj);
+            String line1 = Reader.nextLine();
+            List<String> keys = Arrays.asList(line1.split(","));
 
-            String inp = " ";
+            while (Reader.hasNextLine()) {
+                HashMap<String, String> data_tem = new HashMap<>();
+                String data = Reader.nextLine();
+                List<String> key_value = Arrays.asList(data.split(","));
 
-            while ((inp = br.readLine()) != null) {
-                asList.add(inp);
+                for (int i = 0; i < keys.size(); i++) {
+                    data_tem.put(keys.get(i), key_value.get(i));
+
+                }
+                asList.add(data_tem);
             }
-            br.close();
+            Reader.close();
 
         } catch (IOException ioe) {
             ioe.printStackTrace();
@@ -42,10 +53,10 @@ public class getDataTest {
 
     @Parameters
     public static Collection input() {
-        return Arrays.asList(new Object[][] { { "sample_file_1.csv", "sample_file_1.csv" },
-                { "test1a.csv", "test1a.csv" }, { "test1b.csv", "test1b.csv" },
-                { "test2a.csv", "test2a.csv" }, { "test2b.csv", "test2b.csv" },
-                { "test3a.csv", "test3a.csv" }, { "test3b.csv", "test3b.csv" } });
+        return Arrays.asList(new Object[][] { { (path + "sample_file_1.csv"), path + "sample_file_1.csv" },
+                { path + "test1a.csv", path + "test1a.csv" }, { path + "test1b.csv", path + "test1b.csv" },
+                { path + "test2a.csv", path + "test2a.csv" }, { path + "test2b.csv", path + "test2b.csv" },
+                { path + "test3a.csv", path + "test3a.csv" }, { path + "test3b.csv", path + "test3b.csv" } });
     }
 
     @Test
